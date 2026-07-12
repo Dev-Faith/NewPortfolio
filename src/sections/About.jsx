@@ -18,9 +18,9 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <img
-              src="/assets/muyiwa.jpeg"
+              src="/assets/grid1.png"
               alt="grid-1"
-              className="w-full sm:h-[276px] h-fit object-contain rounded-xl"
+              className="w-full sm:h-[276px] h-fit object-contain"
             />
             <div>
               <p className="grid-headtext">Hi, I am Muyiwa</p>
