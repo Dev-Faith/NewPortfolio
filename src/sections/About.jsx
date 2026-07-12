@@ -5,7 +5,7 @@ import Button from "../components/Button";
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
   const handleCopy = () => {
-    navigator.clipboard.writeText("engr.eyitope@gmail.com");
+    navigator.clipboard.writeText("adebayofaith0@gmail.com");
     setHasCopied(true);
     setTimeout(() => {
       setHasCopied(false);
@@ -18,14 +18,14 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <img
-              src="/assets/grid1.png"
+              src="/assets/muyiwa.jpeg"
               alt="grid-1"
-              className="w-full sm:h-[276px] h-fit object-contain"
+              className="w-full sm:h-[276px] h-fit object-contain rounded-xl"
             />
             <div>
               <p className="grid-headtext">Hi, I am Muyiwa</p>
               <p className="grid-subtext">
-                With 4 years+ of experience, I have honed my skills in frontend
+                With 5 years+ of experience, I have honed my skills in frontend
                 and backend development , with a focus on animated 3D websites.
               </p>
             </div>
@@ -119,7 +119,7 @@ const About = () => {
                   className="size-[20px] xl:size-[33px] "
                 />
                 <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient text-white">
-                  engr.eyitope@gmail.com
+                  adebayofaith0@gmail.com
                 </p>
               </div>
             </div>

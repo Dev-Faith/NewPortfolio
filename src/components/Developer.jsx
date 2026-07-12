@@ -12,13 +12,13 @@ const Developer = ({ animationName = "idle", ...props }) => {
 
   const { animations: idleAnimation } = useFBX("/models/animations/idle.fbx");
   const { animations: saluteAnimation } = useFBX(
-    "/models/animations/salute.fbx"
+    "/models/animations/salute.fbx",
   );
   const { animations: clappingAnimation } = useFBX(
-    "/models/animations/clapping.fbx"
+    "/models/animations/clapping.fbx",
   );
   const { animations: victoryAnimation } = useFBX(
-    "/models/animations/victory.fbx"
+    "/models/animations/victory.fbx",
   );
 
   idleAnimation[0].name = "idle";
@@ -33,14 +33,20 @@ const Developer = ({ animationName = "idle", ...props }) => {
       clappingAnimation[0],
       victoryAnimation[0],
     ],
-    group
+    group,
   );
 
   useEffect(() => {
-    actions[animationName].reset().fadeIn(0.5).play();
+    const action = actions?.[animationName];
 
-    return () => actions[animationName].fadeOut(0.5);
-  }, [animationName]);
+    if (!action) {
+      return;
+    }
+
+    action.reset().fadeIn(0.5).play();
+
+    return () => action.fadeOut(0.5);
+  }, [actions, animationName]);
 
   return (
     <group {...props} dispose={null} ref={group}>

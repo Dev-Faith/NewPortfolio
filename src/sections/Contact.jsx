@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
+const RECIPIENT_EMAIL = "adebayofaith0@gmail.com";
+
 const Contact = () => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -25,10 +27,11 @@ const Contact = () => {
           from_name: form.name,
           to_name: "Muyiwa",
           from_email: form.email,
-          to_email: "engr.eyitope@gmail.com",
+          to_email: RECIPIENT_EMAIL,
+          reply_to: form.email,
           message: form.message,
         },
-        "f4EKJAupzyKpvw2wA"
+        "f4EKJAupzyKpvw2wA",
       );
       setLoading(false);
 

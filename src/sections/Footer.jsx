@@ -9,23 +9,41 @@ const Footer = () => {
         <p>Privacy Policy</p>
       </div>
       <div className="flex gap-3">
-        <div className="social-icon">
+        <a
+          className="social-icon"
+          href="https://github.com/Dev-Faith/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
           <img src="/assets/github.svg" alt="github" className="w-1/2 h-1/2" />
-        </div>
-        <div className="social-icon">
+        </a>
+        <a
+          className="social-icon"
+          href="https://x.com/FaithMuyiwa"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Twitter"
+        >
           <img
             src="/assets/twitter.svg"
             alt="twitter"
             className="w-1/2 h-1/2"
           />
-        </div>
-        <div className="social-icon">
+        </a>
+        <a
+          className="social-icon"
+          href="https://www.linkedin.com/in/adebayo-faith-eyitope-1b4502185/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
           <img
-            src="/assets/instagram.svg"
-            alt="instagram"
+            src="/assets/linkedin.svg"
+            alt="linkedin"
             className="w-1/2 h-1/2"
           />
-        </div>
+        </a>
       </div>
       <p className="text-white-500">Ⓒ 2024 Muyiwa. All rights reserved</p>
     </section>

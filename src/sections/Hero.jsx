@@ -59,8 +59,11 @@ const Hero = () => {
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
   return (
-    <section id="home" className="min-h-screen w-full flex flex-col relative">
-      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
+    <section
+      id="home"
+      className="relative isolate min-h-screen w-full flex flex-col"
+    >
+      <div className="relative z-10 w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
         <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans ">
           Hi, I am Muyiwa <span className="waving-hand">👋</span>
         </p>
@@ -68,9 +71,9 @@ const Hero = () => {
           Building Products and Brands
         </p>
       </div>
-      <div className="w-full h-full absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 z-0 w-full h-full">
         {/* <Leva/> */}
-        <Canvas className="w-full h-full">
+        <Canvas className="w-full h-full bg-transparent" gl={{ alpha: true }}>
           <Suspense fallback={<CanvasLoader />}>
             <PerspectiveCamera makeDefault position={[0, 0, 20]} />
             <HeroCamera isMobile={isMobile}>
@@ -94,7 +97,7 @@ const Hero = () => {
           </Suspense>
         </Canvas>
       </div>
-      <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
+      <div className="absolute bottom-7 left-0 right-0 z-10 w-full c-space">
         <a href="#about" className="w-fit">
           <Button
             name="Let's work together"
