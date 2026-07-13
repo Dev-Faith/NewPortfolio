@@ -34,17 +34,17 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <img
-              src="/assets/grid2.png"
+              src="/assets/stack.jpeg"
               alt="grid-2"
-              className="w-full sm:h-[276px] h-fit object-contain"
+              className="w-full sm:h-[276px] h-fit object-contain rounded-md"
             />
             <div className="">
               <p className="grid-headtext">Tech Stack</p>
             </div>
             <div className="">
               <p className="grid-subtext">
-                I specialise in Javascript/Typescript with a focus on React and
-                Nextjs ecosystems.
+                I specialise in Javascript/Typescript with a focus on React,
+                React Native, and Nextjs ecosystems.
               </p>
             </div>
           </div>
