@@ -36,7 +36,7 @@ const About = () => {
             <img
               src="/assets/stack.jpeg"
               alt="grid-2"
-              className="w-full sm:h-[276px] h-fit object-contain rounded-md"
+              className="w-full sm:h-[276px] h-fit object-contain rounded-3xl"
             />
             <div className="">
               <p className="grid-headtext">Tech Stack</p>
