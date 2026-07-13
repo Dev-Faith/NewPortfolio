@@ -43,8 +43,12 @@ const Contact = () => {
       });
     } catch (error) {
       setLoading(false);
-      console.log(error);
-      alert("An error occurred, please try again later.");
+      console.error("EmailJS send failed:", error);
+      alert(
+        error?.text ||
+          error?.message ||
+          "An error occurred, please try again later.",
+      );
     }
   };
 

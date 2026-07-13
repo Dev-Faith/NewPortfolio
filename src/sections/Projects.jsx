@@ -23,7 +23,14 @@ const Projects = () => {
     <section id="work" className="c-space my-20">
       <p className="head-text">Selected Projects</p>
       <div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
-        <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
+        <div className="relative flex flex-col gap-5 overflow-hidden sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
+          <a
+            href={currentProject.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${currentProject.title}`}
+            className="absolute inset-0 z-0 rounded-lg"
+          />
           <div className="pointer-events-none absolute top-0 right-0">
             <img
               src={currentProject.spotlight}
@@ -66,7 +73,7 @@ const Projects = () => {
               <img src="/assets/arrow-up.png" alt="arrow" className="w-3 h-3" />
             </a>
           </div>
-          <div className="relative z-10 flex justify-between items-center mt-7">
+          <div className="relative z-20 flex justify-between items-center mt-7">
             <button
               className="arrow-btn"
               onClick={() => handleNavigation("previous")}
