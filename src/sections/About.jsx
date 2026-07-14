@@ -25,7 +25,7 @@ const About = () => {
             <div>
               <p className="grid-headtext">Hi, I am Muyiwa</p>
               <p className="grid-subtext">
-                With 5 years+ of experience, I have honed my skills in frontend
+                With 3 years+ of experience, I have honed my skills in frontend
                 and backend development , with a focus on animated 3D websites.
               </p>
             </div>
