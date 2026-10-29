@@ -620,3 +620,10 @@ body { overflow-x: clip; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-hand-parallax { transform: none; } }
 .connection-hero .hero-copy h1 > span:not(.copper-period) { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-style: italic; color: var(--copper); letter-spacing: -.065em; }
+
+
+.hero-cv { pointer-events: auto; display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; padding: 6px 0; font-size: 11px; color: #b9bbaa; transition: color .25s; }
+.hero-cv-format { font-size: 7px; letter-spacing: 1px; color: #7f8973; border: 1px solid #ffffff20; padding: 2px 4px; }
+.hero-cv > span[aria-hidden] { color: var(--copper); transition: transform .25s; }
+.hero-cv:hover { color: var(--ivory); }
+.hero-cv:hover > span[aria-hidden] { transform: translateY(3px); }

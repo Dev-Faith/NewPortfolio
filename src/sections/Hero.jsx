@@ -55,6 +55,7 @@ export default function Hero() {
         <h1 className="hero-reveal">Digital craft.<br /><span>Human</span> impact<span className="copper-period">.</span></h1>
         <p className="hero-description hero-reveal">I’m Muyiwa — a full-stack developer bringing human ideas and technology together. Thoughtful experiences, built with feeling.</p>
         <div className="hero-actions hero-reveal"><a className="atelier-button" href="#work">Explore my work <span>↗</span></a><a className="hero-contact" href="#contact">Let’s talk <span>↗</span></a></div>
+        <a className="hero-cv hero-reveal" href="/documents/Faith-Adebayo-Muyiwa-CV.pdf" download="Faith-Adebayo-Muyiwa-CV.pdf">Download CV <span className="hero-cv-format">PDF</span><span aria-hidden="true">↓</span></a>
       </div>
       <div className="hero-art hero-connection-art">
         <div className="hero-hand-scroll"><div className="hero-hand-stage"><div ref={hands} className="hero-hand-parallax"><img className="hero-hands-image" src="/assets/human-machine-connection.webp" width="1536" height="1024" fetchPriority="high" decoding="async" alt="A human hand and a copper-and-titanium robotic hand reach toward one another, their index fingertips almost touching." /></div></div></div>
