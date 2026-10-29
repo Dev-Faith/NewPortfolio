@@ -1,133 +1,93 @@
-import React, { useState } from "react";
-import Globe from "react-globe.gl";
-import Button from "../components/Button";
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const About = () => {
-  const [hasCopied, setHasCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText("adebayofaith0@gmail.com");
-    setHasCopied(true);
-    setTimeout(() => {
-      setHasCopied(false);
-    }, 2000);
+gsap.registerPlugin(ScrollTrigger);
+
+const toolkit = {
+  Frontend: [['React / Next.js', 'Interfaces with purpose'], ['TypeScript', 'Clarity at every scale'], ['React Native / Expo', 'Experiences beyond the browser'], ['Tailwind CSS', 'Details, thoughtfully composed']],
+  Backend: [['NestJS / Node.js', 'Structure behind the experience'], ['PostgreSQL / Prisma', 'Data built on solid foundations'], ['REST APIs', 'Connecting the moving parts'], ['Authentication', 'Secure by design']],
+  Creative: [['Three.js', 'A new dimension of interaction'], ['GSAP', 'Motion with intention'], ['Framer Motion', 'Small moments that feel right'], ['Responsive design', 'Considered at every size']],
+};
+const email = 'adebayofaith0@gmail.com';
+const localTime = () => new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
+
+export default function About() {
+  const root = useRef(null);
+  const resetTimer = useRef(null);
+  const [active, setActive] = useState('Frontend');
+  const [copyStatus, setCopyStatus] = useState('');
+  const [time, setTime] = useState(localTime);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setTime(localTime()), 30000);
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray('[data-about-reveal]').forEach(element => {
+          gsap.from(element, { y: 32, opacity: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 94%', once: true } });
+        });
+        gsap.fromTo('.about-portrait img', { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: '.about-portrait', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      }, root);
+      return () => context.revert();
+    });
+    return () => { window.clearInterval(timer); window.clearTimeout(resetTimer.current); media.revert(); };
+  }, []);
+
+  const copyEmail = async () => {
+    window.clearTimeout(resetTimer.current);
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyStatus('Email copied');
+    } catch {
+      setCopyStatus('Could not copy. Use the email link instead.');
+    }
+    resetTimer.current = window.setTimeout(() => setCopyStatus(''), 4000);
   };
 
   return (
-    <section id="about" className="c-space my-20">
-      <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
-        <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/muyiwa.jpeg"
-              alt="grid-1"
-              className="w-full sm:h-[276px] h-fit object-contain"
-            />
-            <div>
-              <p className="grid-headtext">Hi, I am Muyiwa</p>
-              <p className="grid-subtext">
-                With 4 years+ of experience, I have honed my skills in frontend
-                and backend development , with a focus on animated 3D websites.
-              </p>
+    <section id="about" ref={root} className="atelier-about">
+      <div className="about-section-label" data-about-reveal><span><i /> THE PERSON BEHIND THE PIXELS</span><span>01 / ABOUT</span></div>
+      <header className="about-heading" data-about-reveal>
+        <h2>Equal parts logic.<br /><em>A little more soul.</em></h2>
+        <p>Good software should do more than work.<br />It should feel like someone cared.</p>
+      </header>
+
+      <div className="about-main">
+        <figure className="about-portrait" data-about-reveal>
+          <div className="portrait-window"><img src="/assets/faith-adebayo-muyiwa.png" alt="Faith Adebayo Muyiwa in a suit, full-stack developer" loading="lazy" width="640" height="640" /></div>
+          <div className="portrait-corner" aria-hidden="true">+</div>
+          <figcaption><span>FAITH ADEBAYO MUYIWA</span><span>DEVELOPER & MAKER</span></figcaption>
+          <span className="portrait-note">A HUMAN, BEFORE ANYTHING ELSE.</span>
+        </figure>
+
+        <div className="about-story">
+          <div className="about-intro" data-about-reveal><span className="about-micro">A LITTLE ABOUT ME</span><h3>Curiosity is the starting point.<br />Craft is what comes next.</h3><p>I’m Faith Adebayo Muyiwa, known in tech as Muyiwa — a full-stack developer based in Minna, Nigeria. For over four years, I’ve been turning complex ideas into digital products that are simple to use and hard to forget.</p><p>I move between frontend detail and backend architecture, with a particular love for expressive motion, immersive 3D, and the small interactions that make a product feel alive.</p></div>
+          <div className="about-toolkit" data-about-reveal>
+            <div className="toolkit-heading"><span className="about-micro">MY TOOLKIT</span><span>ALWAYS EVOLVING ↗</span></div>
+            <div className="toolkit-tabs" role="tablist" aria-label="Development disciplines">
+              {Object.keys(toolkit).map(category => <button key={category} id={`tab-${category}`} role="tab" aria-selected={active === category} aria-controls="toolkit-panel" tabIndex={active === category ? 0 : -1} onClick={() => setActive(category)} onKeyDown={event => {
+                const keys = Object.keys(toolkit);
+                const index = keys.indexOf(category);
+                const next = event.key === 'ArrowRight' ? keys[(index + 1) % keys.length] : event.key === 'ArrowLeft' ? keys[(index + keys.length - 1) % keys.length] : event.key === 'Home' ? keys[0] : event.key === 'End' ? keys[keys.length - 1] : null;
+                if (next) { event.preventDefault(); setActive(next); document.getElementById(`tab-${next}`)?.focus(); }
+              }}>{category}<span>{active === category ? '−' : '+'}</span></button>)}
             </div>
-          </div>
-        </div>
-        <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/stack.jpeg"
-              alt="grid-2"
-              className="w-full sm:h-[276px] h-fit object-contain rounded-3xl"
-            />
-            <div className="">
-              <p className="grid-headtext">Tech Stack</p>
-            </div>
-            <div className="">
-              <p className="grid-subtext">
-                I specialise in Javascript/Typescript with a focus on React,
-                React Native, and Nextjs ecosystems.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-span-1 xl:row-span-4">
-          <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
-              <Globe
-                height={326}
-                width={326}
-                backgroundColor="rgba(0,0,0,0)"
-                backgroundImageOpacity={0.5}
-                showAtmosphere={true}
-                showGraticules={true}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-                bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                labelsData={[
-                  {
-                    lat: 37.7749,
-                    lng: -122.4194,
-                    text: "I am here!",
-                    color: "white",
-                    size: 20,
-                  },
-                ]}
-              />
-            </div>
-            <div>
-              <p className="grid-headtext">
-                I work remotely across most timezones{" "}
-              </p>
-              <p className="grid-subtext">
-                I'm based in Minna, Nigeria with remote work available{" "}
-              </p>
-              <Button
-                name="Contact Me"
-                isBeam={true}
-                containerClass="w-full mt-10"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="xl:col-span-2 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="/assets/grid3.png"
-              alt="grid-3"
-              classNamw="w-full sm:h-[266px] h-fit object-contain"
-            />
-            <div>
-              <p className="grid-headtext">My passion for coding</p>
-              <p className="grid-subtext">
-                I love solving problems and building things through code. It is
-                definnitely my passion
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="xl:col-span-1 xl:row-span-2">
-          <div className="grid-container">
-            <img
-              src="/assets/grid4.png"
-              alt="grid-4"
-              className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
-            />
-            <div className="space-y-2">
-              <p className="grid-subtext text-center">Contact me</p>
-              <div className="copy-container" onClick={handleCopy}>
-                <img
-                  src={hasCopied ? "/assets/tick.svg" : "/assets/copy.svg"}
-                  alt="copy"
-                  className="size-[20px] xl:size-[33px] "
-                />
-                <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient text-white">
-                  adebayofaith0@gmail.com
-                </p>
-              </div>
+            <div id="toolkit-panel" role="tabpanel" aria-labelledby={`tab-${active}`} tabIndex={0}>
+              {toolkit[active].map(([name, description], index) => <div className="toolkit-row" key={name}><span className="toolkit-index">0{index + 1}</span><span>{name}</span><span className="toolkit-detail">{description}</span><span className="toolkit-dot" /></div>)}
             </div>
           </div>
         </div>
       </div>
+
+      <div className="about-bottom">
+        <div className="about-location" data-about-reveal>
+          <div className="location-globe" aria-hidden="true"><svg viewBox="0 0 220 220" fill="none"><circle cx="110" cy="110" r="86" /><ellipse cx="110" cy="110" rx="39" ry="86" /><ellipse cx="110" cy="110" rx="68" ry="86" /><ellipse cx="110" cy="110" rx="86" ry="32" /><ellipse cx="110" cy="110" rx="86" ry="62" /><path d="M24 110h172M110 24v172" /><ellipse className="globe-orbit" cx="110" cy="110" rx="107" ry="38" transform="rotate(-32 110 110)" /><circle className="globe-pin-halo" cx="88" cy="104" r="10" /><circle className="globe-pin" cx="88" cy="104" r="3" /></svg></div>
+          <div className="location-copy"><span className="about-micro">ROOTED LOCALLY. CONNECTED GLOBALLY.</span><h3>From Nigeria.<br /><em>To wherever you are.</em></h3><p>Open to remote collaborations across time zones.</p><div className="location-meta"><span className="location-live" /> MINNA, NG <span className="location-time">{time} WAT · UTC+1</span></div></div>
+        </div>
+        <div className="about-invitation" data-about-reveal><span className="about-micro">GOOD THINGS START WITH A CONVERSATION</span><a className="about-talk" href="#contact">Have something<br />in mind? <em>Let’s talk.</em><span aria-hidden="true">↗</span></a><div className="about-email-row"><a href={`mailto:${email}`}>{email}</a><button onClick={copyEmail} aria-label="Copy email address" title="Copy email address">{copyStatus === 'Email copied' ? '✓' : <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="7" y="7" width="9" height="10" rx="1" /><path d="M12 7V3H3v10h4" /></svg>}</button></div><p className="about-copy-status" role="status">{copyStatus}</p></div>
+      </div>
+      <div className="about-footnote"><span>THOUGHTFUL BY DESIGN. PRECISE BY NATURE.</span><a href="#work">NEXT UP — SELECTED WORK <span>↓</span></a></div>
     </section>
   );
-};
-
-export default About;
+}
