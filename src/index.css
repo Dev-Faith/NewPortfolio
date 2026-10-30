@@ -269,10 +269,10 @@ body { overflow-x: clip; }
 .about-heading > p { font-size: 13px; color: #92968a; line-height: 1.9; padding-bottom: 5px; }
 .about-main { display: grid; grid-template-columns: .85fr 1.3fr; gap: 8%; }
 .about-portrait { position: relative; align-self: start; margin: 0; }
-.portrait-window { position: relative; aspect-ratio: .83; overflow: hidden; background: #21231e; border: 1px solid #ffffff12; }
-.portrait-window::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg,#11140f55,transparent 50%),#b3946d12; }
-.portrait-window img { width: 100%; max-width: none; height: 110%; object-fit: cover; object-position: 50% 30%; position: absolute; left: 0; top: -5%; filter: saturate(.85); transition: filter .6s; }
-.about-portrait:hover img { filter: saturate(1); }
+.portrait-window { position: relative; aspect-ratio: .83; overflow: hidden; background: #252019; border: 1px solid #bd967840; }
+.portrait-window::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg,#1a130d66,transparent 55%),linear-gradient(135deg,#d3b29620,#bd96781a 55%,#39291b24); }
+.portrait-window img { width: 100%; max-width: none; height: 110%; object-fit: cover; object-position: 50% 30%; position: absolute; left: 0; top: -5%; filter: sepia(.75) saturate(.65) contrast(1.06) brightness(.94); transition: filter .6s; }
+.about-portrait:hover img { filter: sepia(.5) saturate(.8) contrast(1.04) brightness(.98); }
 .portrait-corner { position: absolute; top: 13px; left: 17px; color: var(--copper); font-size: 25px; font-weight: 200; z-index: 1; }
 .about-portrait figcaption { display: flex; justify-content: space-between; gap: 12px; padding-top: 18px; font-size: 8px; letter-spacing: 1.1px; color: #c0c1b6; }
 .about-portrait figcaption span:last-child { color: #72776a; }
